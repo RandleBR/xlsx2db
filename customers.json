@@ -1,0 +1,49 @@
+{
+  "schema": "BRIANR",
+  "table": "Customers",
+  "firstRow": 2,
+  "xlsxFile" : "./BrianRCustomers.xlsx",
+  "sheet" : "Sheet1",  
+  "cols": [
+    {
+      "COL": "0",
+      "NAME": "CUSTID",
+      "TYPE": "INTEGER",
+      "LEN": "10",
+      "DECIMAL": "0",
+      "NULLABLE": "0"
+    },
+    {
+      "COL": "1",
+      "NAME": "NAME",
+      "TYPE": "CHAR",
+      "LEN": "60",
+      "DECIMAL": "0",
+      "NULLABLE": "0"
+    },
+    {
+      "COL": "2",
+      "NAME": "ADDR",
+      "TYPE": "CHAR",
+      "LEN": "60",
+      "DECIMAL": "0",
+      "NULLABLE": "0"
+    },
+    {
+      "COL": "3",
+      "NAME": "CITY",
+      "TYPE": "CHAR",
+      "LEN": "40",
+      "DECIMAL": "0",
+      "NULLABLE": "0"
+    },
+    {
+      "COL": "4",
+      "NAME": "STATE",
+      "TYPE": "CHAR",
+      "LEN": "2",
+      "DECIMAL": "0",
+      "NULLABLE": "0"
+    }
+  ]
+}

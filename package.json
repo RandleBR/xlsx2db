@@ -1,0 +1,14 @@
+{
+  "name": "xlsx2db",
+  "version": "0.1.0",
+  "description": "Transform a XLSX spreadsheet into a database file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "BRandle",
+  "license": "ISC",
+  "dependencies": {
+    "xlsx-populate": "^1.5.4"
+  }
+}
