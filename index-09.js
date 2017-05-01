@@ -1,13 +1,23 @@
 const XlsxPopulate = require('xlsx-populate');
-const cfg = require('./customers2.json')
 const formatCell = require('./formatCell')
+const opts = require('commander')
 
-XlsxPopulate.fromFileAsync(cfg.xlsxFile)
+opts
+  .version('1.0.0')
+  .description(`Write XLSX spreadsheet rows to a DB2 database.
+     The config contains the path and name of the xlsxFile,
+     the name of the Sheet to extract,
+     the name of the db2 schema and table.`)
+  .option('--config <path>', 'JSON configuration path and file name')
+  .parse(process.argv)
+const cfg = require(opts.config)
+
+XlsxPopulate.fromFileAsync(cfg.xlsx)
   .then(workbook => {
-    var usedRange = workbook.sheet("Sheet1").usedRange()
+    var usedRange = workbook.sheet(cfg.sheet).usedRange()
     var startRow = usedRange.startCell().rowNumber()
-    startRow = startRow > 2? startRow : 2
-    const ws = workbook.sheet("Sheet1")
+    startRow = startRow > cfg.startRow ? startRow : cfg.startRow
+    const ws = workbook.sheet(cfg.sheet)
       .range(startRow,
         usedRange.startCell().columnNumber(),
         usedRange.endCell().rowNumber(),
@@ -32,7 +42,8 @@ XlsxPopulate.fromFileAsync(cfg.xlsxFile)
         return formatCell(opts)
       }).join(',') + endRow
     }).join(',\n')
-
+    console.log(SQL)
+    process.exit()
     // The SQL statement is ready to execute!
     var db = require('/QOpenSys/QIBM/ProdData/OPS/Node6/os400/db2i/lib/db2a')
     var dbconn = new db.dbconn(); // Create a connection object.

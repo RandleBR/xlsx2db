@@ -6,19 +6,21 @@ function pad(number) {
 const Q = "'"
 var d
 
-module.exports = function(value, type, len, nullable, numberToDate) {
-  if ((value == undefined) && nullable) return 'null'
-  switch (type) {
+module.exports = function(opts) {
+  if ((opts.value == undefined) && opts.allowNull) return 'null'
+  switch (opts.type) {
     case "DATE":
     case "TIMESTMP":
     case "TIME":
-      if (isNaN(value)) throw new Error('error converting cell to a number:' + value)
-      try {
-        d = numberToDate(value)
-      } catch (e) {
-        throw new Error('error converting cell to a ' + type + ' error:' + e)
+      if (isNaN(opts.value)) {
+        throw new Error(`error converting row ${opts.rowNum}, column ${opts.colNum} to a ${opts.type}`)
       }
-      switch (type) {
+      try {
+        d = opts.numberToDate(opts.value)
+      } catch (e) {
+        throw new Error(`error ${e} converting row ${opts.rowNum}, column ${opts.colNum} to a ${opts.type}`)
+      }
+      switch (opts.type) {
         case "DATE":
           return Q + d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + Q
         case "TIMESTMP":
@@ -35,17 +37,19 @@ module.exports = function(value, type, len, nullable, numberToDate) {
     case "BINARY":
     case "BIGINT":
     case "SMALLINT":
-      if (isNaN(value)) throw new Error('error converting cell to a number:' + value)
-      return value
+      if (isNaN(opts.value)) {
+        throw new Error(`error converting row ${opts.rowNum}, column ${opts.colNum} to a ${opts.type}`)
+      }
+      return opts.value
     default:
       try {
-        if (value.length > len) {
-          value = value.substring(0, len)
+        if (opts.value.length > opts.len) {
+          opts.value = opts.value.substring(0, opts.len)
         }
         //treat as string - replace any sinqle quote with 2 single quotes
-        return Q + value.toString().replace(/'/g, Q + Q) + Q
+        return Q + opts.value.toString().replace(/'/g, Q + Q) + Q
       } catch (e) {
-        return Q + value + Q
+        throw new Error(`Hey,error converting row ${opts.rowNum}, column ${opts.colNum} to a ${opts.type}`)
       }
   }
 }

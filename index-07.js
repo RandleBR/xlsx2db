@@ -32,19 +32,7 @@ XlsxPopulate.fromFileAsync(cfg.xlsxFile)
         return formatCell(opts)
       }).join(',') + endRow
     }).join(',\n')
-
-    // The SQL statement is ready to execute!
-    var db = require('/QOpenSys/QIBM/ProdData/OPS/Node6/os400/db2i/lib/db2a')
-    var dbconn = new db.dbconn(); // Create a connection object.
-    dbconn.conn("*LOCAL", function() {
-      dbconn.setConnAttr(db.SQL_ATTR_AUTOCOMMIT, db.SQL_TXN_NOCOMMIT)
-    })
-    var stmt = new db.dbstmt(dbconn)
-    stmt.exec(SQL, function() {
-      stmt.close() // Clean up the statement object (PTF SI64401)
-      dbconn.disconn() // Disconnect from the database.
-      dbconn.close() // Clean up the connection object (PTF SI64401)
-    })
+    console.log(SQL)
   }).catch((error) => {
     throw new Error('XlsxPopulate.fromFileAsync:' + error)
   });
