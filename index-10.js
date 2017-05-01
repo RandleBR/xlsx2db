@@ -55,8 +55,7 @@ XlsxPopulate.fromFileAsync(cfg.xlsx)
         return formatCell(opts)
       }).join(',') + endRow
     }).join(',\n')
-    console.log(SQL)
-    process.exit()
+    
     // The SQL statement is ready to execute!
     var db = require('/QOpenSys/QIBM/ProdData/OPS/Node6/os400/db2i/lib/db2a')
     var dbconn = new db.dbconn(); // Create a connection object.
