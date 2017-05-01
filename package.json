@@ -1,13 +1,16 @@
 {
   "name": "xlsx2db",
-  "version": "0.1.0",
-  "description": "Transform a XLSX spreadsheet into a database file",
+  "version": "0.1.1",
+  "description": "Transform a XLSX spreadsheet to a DB2 database file",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "scripts": {"start": "node index.js"},
+  "directories.bin": "/QOpenSys/QIBM/ProdData/OPS/Node6/OS400/db2i/lib",
+  "author": "BRandle <brianprandle@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BRandle/xlsx2db.git"
   },
-  "author": "BRandle",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0",
     "xlsx-populate": "^1.5.4"
