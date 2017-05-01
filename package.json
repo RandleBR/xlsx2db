@@ -9,6 +9,7 @@
   "author": "BRandle",
   "license": "ISC",
   "dependencies": {
+    "commander": "^2.9.0",
     "xlsx-populate": "^1.5.4"
   }
 }
