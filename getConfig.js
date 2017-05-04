@@ -8,14 +8,21 @@ opts
      Intended for use with the xls2db project.`)
   .option('--schema <name>', 'DB2 schema')
   .option('--table <name>', 'DB2 table name')
+  .option('--xlsx [name]', 'Optional name and path of xlsx file')
+  .option('--sheet [name]', 'Optional sheet name in xlsxFile. Defaults to first sheet')
+  .option('--startRow [integer]', 'Optional Row number to start export. Defaults to first row', parseInt)
   .parse(process.argv)
 
 var db = require('/QOpenSys/QIBM/ProdData/OPS/Node6/os400/db2i/lib/db2a')
 var cfg = {
-  schema : opts.schema,
-  table : opts.table
+  schema : opts.schema.toUpperCase(),
+  table : opts.table.toUpperCase()
 }
-var dbconn = new db.dbconn(); // Create a connection object.
+if (opts.xlsx) cfg.xlsx = opts.xlsx
+if (opts.sheet) cfg.sheet = opts.sheet
+if (opts.startRow) cfg.startRow = opts.startRow
+
+var dbconn = new db.dbconn('db2i/lib/db2a'); // Create a connection object.
 dbconn.conn("*LOCAL")
 var stmt = new db.dbstmt(dbconn)
 var SQLstmt =
