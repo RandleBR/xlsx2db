@@ -1,19 +1,10 @@
 // getConfig.js - Create a JSON file with the db2 table name and columns
 // to be used with the xlsx2db application
-const opts = require('commander')
-
-opts
-  .version('1.0.0')
-  .description(`Create a JSON file of a DB2 table and column configuration.
-     Intended for use with the xls2db project.`)
-  .option('--schema <name>', 'DB2 schema')
-  .option('--table <name>', 'DB2 table name')
-  .parse(process.argv)
 
 var db = require('/QOpenSys/QIBM/ProdData/OPS/Node6/os400/db2i/lib/db2a')
 var cfg = {
-  schema : opts.schema,
-  table : opts.table
+  schema : 'BRANDLE',
+  table : 'CUSTOMERS'
 }
 var dbconn = new db.dbconn(); // Create a connection object.
 dbconn.conn("*LOCAL")

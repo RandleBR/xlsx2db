@@ -2,7 +2,7 @@ const XlsxPopulate = require('xlsx-populate');
 const cfg = require('./customers2.json')
 const formatCell = require('./formatCell')
 
-XlsxPopulate.fromFileAsync(cfg.xlsxFile)
+XlsxPopulate.fromFileAsync("./Customers10.xlsx")
   .then(workbook => {
     var usedRange = workbook.sheet("Sheet1").usedRange()
     var startRow = usedRange.startCell().rowNumber()
