@@ -3,6 +3,7 @@ const cfg = require('./customers2.json')
 const formatCell = require('./formatCell')
 
 var formatSQL = function(rows) {
+  if (!rows.startRow) rows.startRow = 0   // set if not defined
   let beginRow = '(',
     endRow = ')'
   let mapRows = function(row, rowNum) {
@@ -30,8 +31,9 @@ var formatSQL = function(rows) {
 
 XlsxPopulate.fromFileAsync("./Customers10.xlsx")
   .then(workbook => {
-    var usedRange = workbook.sheet("Sheet1").usedRange()
-    var rows = {}
+    debugger 
+    let usedRange = workbook.sheet("Sheet1").usedRange()
+    let rows = {}
     rows.startRow = usedRange.startCell().rowNumber()
     rows.startRow = rows.startRow > 2 ? rows.startRow : 2
     rows.ws = workbook.sheet("Sheet1")
