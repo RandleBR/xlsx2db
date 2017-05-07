@@ -35,13 +35,13 @@ npm link
 
 ## Using the link in a node project
 
-In project directory, exeute :
+In project each project directory, exeute :
 
 ```
 npm link db2i
 ```
 
-Now in project the require can be 
+The project require() can be be be shortened (and does not include the node version)
 
 ```
 modulename = require('db2i/lib/db2a')
