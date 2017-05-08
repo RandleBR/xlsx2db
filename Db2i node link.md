@@ -57,13 +57,13 @@ repeat for Node4 if installed.
 
 ## Using the link in a node project
 
-In each node project directory that requires the IBM DB2i module, exeute :
+In each node project directory that requires the IBM DB2i module, execute :
 
 ```
 npm link db2i
 ```
 This creates a symbolic link in the project's node_modules directory. 
-The project require() can be be be shortened (and does not include the node version)
+The project require() can be be be shortened (so it does not include the node version)
 
 ```
 var modulename = require('db2i/lib/db2a')
